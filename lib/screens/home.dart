@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:states_widgets_routes/models/language.dart';
+import 'package:states_widgets_routes/screens/add_language.dart';
 // import 'package:flutter/src/foundation/key.dart';
 
 class MyHome extends StatefulWidget {
@@ -36,6 +37,20 @@ class _MyHomeState extends State<MyHome> {
           ))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (() {
+          Future future = Navigator.pushNamed(
+            context, 
+            "/add");
+          future.then((value) {
+            debugPrint(value.title);
+            debugPrint(value.subtitle);
+            languages.add(value);
+            refresh();
+          });
+        }),
+        child: const Icon(Icons.add_circle_outline),
+      ),
     );
   }
 
@@ -60,5 +75,11 @@ class _MyHomeState extends State<MyHome> {
               ),
             ))
         .toList();
+  }
+
+  refresh(){
+    setState(() {
+      
+    });
   }
 }
