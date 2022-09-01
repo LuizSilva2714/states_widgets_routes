@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:states_widgets_routes/models/language.dart';
-import 'package:states_widgets_routes/screens/add_language.dart';
 // import 'package:flutter/src/foundation/key.dart';
 
 class MyHome extends StatefulWidget {
@@ -12,11 +11,11 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   List<Language> languages = [
-    Language("Android Nativo", "Linguagens C, Java, Kotlin"),
-    Language("iOS Nativo", "Objective-C e Swift"),
-    Language("Flutter", "Linguagens Dart"),
-    Language("React Native", "Linguagens JavaScript e TypeScript"),
-    Language("Ionic", "Linguagens JavaScript e TypeScript"),
+    // Language("Android Nativo", "Linguagens C, Java, Kotlin"),
+    // Language("iOS Nativo", "Objective-C e Swift"),
+    // Language("Flutter", "Linguagens Dart"),
+    // Language("React Native", "Linguagens JavaScript e TypeScript"),
+    // Language("Ionic", "Linguagens JavaScript e TypeScript"),
   ];
 
   Widget title = const Text("Minhas Linguagens");
@@ -24,7 +23,12 @@ class _MyHomeState extends State<MyHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: title),
+      appBar: AppBar(
+        title: title,
+        actions: [
+          IconButton(onPressed: _goToAddLanguage, icon: const Icon(Icons.add_circle))
+        ],
+        ),
       body: Column(
         children: [
           Wrap(
@@ -39,15 +43,7 @@ class _MyHomeState extends State<MyHome> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (() {
-          Future future = Navigator.pushNamed(
-            context, 
-            "/add");
-          future.then((value) {
-            debugPrint(value.title);
-            debugPrint(value.subtitle);
-            languages.add(value);
-            refresh();
-          });
+          _goToAddLanguage();
         }),
         child: const Icon(Icons.add_circle_outline),
       ),
@@ -72,14 +68,33 @@ class _MyHomeState extends State<MyHome> {
                 leading: Icon(e.icon),
                 title: Text(e.title),
                 subtitle: Text(e.subtitle),
+                onTap: () {
+                  Future future = Navigator.pushNamed(
+                  context, 
+                  "/add");
+                future.then((value) {
+                  refresh(value);
+                });
+                },
               ),
             ))
         .toList();
   }
 
-  refresh(){
+  _goToAddLanguage(){
+    Future future = Navigator.pushNamed(
+            context, 
+            "/add");
+          future.then((value) {
+            setState(() {
+              languages.add(value);
+              
+            });
+          });
+  }
+
+  refresh(Language language){
     setState(() {
-      
     });
   }
 }

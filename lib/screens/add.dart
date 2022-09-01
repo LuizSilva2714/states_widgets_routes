@@ -3,6 +3,9 @@ import 'package:states_widgets_routes/models/language.dart';
 
 class AddLanguage extends StatelessWidget {
   AddLanguage({Key? key}) : super(key: key);
+  static const routeName = "/add";
+  final Text title = const Text("Nova Linguagem");
+  final EdgeInsets padding = const EdgeInsets.all(16);
   
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
@@ -12,10 +15,10 @@ class AddLanguage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Nova linguagem"),
+        title: title,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: padding,
         child: Form(
           key: _formKey,
           child: Column(

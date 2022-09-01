@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:states_widgets_routes/screens/add_language.dart';
+import 'package:states_widgets_routes/screens/add.dart';
 import 'package:states_widgets_routes/screens/home.dart';
 
 void main() {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         "/": (context) => const MyHome(),
-        "/add": (context) => AddLanguage()
+        AddLanguage.routeName: (context) => AddLanguage()
       },
     );
   }
